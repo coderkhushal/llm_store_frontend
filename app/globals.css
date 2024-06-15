@@ -39,7 +39,7 @@
       --background: 222.2 84% 4.9%;
       --foreground: 210 40% 98%;
 
-      --card: 222.2 84% 4.9%;
+      --card: #000  ;
       --card-foreground: 210 40% 98%;
 
       --popover: 222.2 84% 4.9%;
@@ -71,7 +71,7 @@
       @apply border-border;
     }
     body {
-      @apply bg-background text-foreground;
+      background:#000;
     }
   }
 
@@ -79,3 +79,32 @@
     height: 100%;
     width: 100%;
   }
+
+
+  .glass-button {
+    display: inline-block;
+    padding: 24px 32px;
+    border: 0;
+    text-decoration: none;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(30px);
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .glass-button:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+.bg-white{
+  background:#000 !important;
+}
+.border-transparent{
+  border-color: grey !important;
+  
+}
