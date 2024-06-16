@@ -86,13 +86,13 @@ export default function BentoGridThirdDemo() {
         setlink(value=>(data.url))
     }
   return (
-    <main className='px-[24vh]'>
+    <main className='px-[4vh] lg:px-[24vh]'>
     <div className='flex gap-[54vh] mt-12 pb-32'>
-        <div className='text-white text-xl font-bold items-center flex py-4 pl-16 '>LOGO</div>
-        <div className=' flex justify-center items-center'><h1 className='text-white font-bold text-[8vh]'>Explore LLMs</h1></div>
+        <div className='text-white text-xl font-bold items-center flex py-4 pl-16 lg:block hidden '>LOGO</div>
+        <div className=' flex justify-center items-center'><h1 className='text-white font-bold lg:text-[6vh] text-4xl'>Explore LLMs</h1></div>
     </div>
-    <div className='flex'>
-        <div className='w-1/6 pl-12 leading-8 fixed'>
+    <div className='flex '>
+        <div className='w-1/6 pl-12 leading-8 fixed lg:block hidden'>
         <h3 className='text-white text-bold'>CATEGORIES</h3>
         <h3 className='text-white/60 '>category 1</h3>
         <h3 className='text-white/60 '>category 2</h3>
@@ -100,9 +100,9 @@ export default function BentoGridThirdDemo() {
         <h3 className='text-white/60 '>category 4</h3>
         <h3 className='text-white/60 '>category 5</h3>
         </div>
-    <div className='absolute left-1/3 h-full border-l px-12 '>
+    <div className='absolute  lg:left-1/3 h-full lg:border-l lg:px-12 '>
 
-    <BentoGrid className=" max-w-4xl my-12  md:auto-rows-[20rem]">
+    <BentoGrid className=" max-w-4xl my-12 sm:auto-rows-[10] sm:grid-cols-2 md:auto-rows-[20rem]">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
