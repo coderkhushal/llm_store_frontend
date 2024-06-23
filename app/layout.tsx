@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import AuthState from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <AuthState>
+
     <html lang="en">
       <body className={`${inter.className} overflow-x-hidden w-full`}>{children}</body>
     </html>
+    </AuthState>
   );
 }

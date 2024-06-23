@@ -2,7 +2,7 @@ import React from 'react'
 
 const RightBarBigCard = () => {
   return (
-    <div className='rounded-xl flex-col space-y-2  shadow-md bg-white h-1/2  flex  items-center w-4/5 p-4 pt-2'>
+    <div className='rounded-xl flex-col space-y-2  shadow-md bg-white h-1/2  flex  items-center w-4/5 px-4 pt-8'>
         <img src="https://cdn.pixabay.com/photo/2023/11/29/22/14/ai-8420370_960_720.jpg" alt="llm" className='w-full rounded-xl h-3/5' />
         
 

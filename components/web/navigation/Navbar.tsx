@@ -22,14 +22,14 @@ const Navbar = () => {
 						</a>
 
 						<ul
-							className=" hidden lg:flex lg:flex-row justify-center items-center text-3xl gap-6 lg:text-base lg:gap-2 absolute h-screen w-screen top-0 left-full lg:left-0 lg:relative lg:h-auto lg:w-auto bg-white dark:bg-[#0b1727] lg:bg-transparent"
+							className=" hidden lg:flex lg:flex-row justify-center items-center text-3xl gap-6 lg:text-base lg:gap-2 absolute h-screen w-screen top-0 left-full lg:left-0 lg:relative lg:h-auto lg:w-auto lg:bg-transparent"
 							id="navbar"
 						>
 							{routes.map((route, i) => (
 								<li key={i}>
 									<Link href={route.href}
 
-										className="p-4 "
+										className="p-4 bg-black "
 
 
 									>
