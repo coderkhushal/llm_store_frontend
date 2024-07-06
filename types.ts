@@ -6,8 +6,9 @@ export type LLM = {
   sellerId:string;
   uploadedAt: string;
   modelImage: string;
-  category:string;
+  category:CategoryType;
   rating?: string;
+  displayImage: string;
 }
 export type BuyerLLMRecordType={
   id: string;
@@ -22,17 +23,19 @@ export type DashBoardRoutesType= {
     href: string;
     icon: any
 }
-export type CategoryType = {
+export type CategoryObjType = {
     icon: any;
     name: string;
 }
-
+export type CategoryType= "PHARMACY" | "CHATTING" | "EDUCATION" | "ECOMMERCE" | "FITNESS" | "TRADING" | "OTHERS"
 export type UserType= {
   id: string;
   username: string;
   email: string;
   modelsbought: BuyerLLMRecordType[]
   review : ReviewType[]
+  modelsuploaded: LLM[]
+  imageUrl: string | null
 }
 
 export type ReviewType= {

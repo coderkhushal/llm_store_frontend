@@ -1,10 +1,15 @@
 import { BookOpenText, BoxesIcon, DumbbellIcon, Home, LineChartIcon, MessageCircle, Plus, ShoppingBag, UserCircle } from 'lucide-react';
-import { CategoryType, DashBoardRoutesType } from './types';
+import { CategoryObjType, DashBoardRoutesType } from './types';
 export const DashBoardRoutes: DashBoardRoutesType[]= [
     {
         name: "Home",
         icon: Home,
         href:"/main"
+    },
+    {
+        name:"Create",
+        icon: Plus,
+        href:"/main/create"
     },
     {
         name:"Profile",
@@ -14,7 +19,7 @@ export const DashBoardRoutes: DashBoardRoutesType[]= [
     
 ]
 
-export const categories : CategoryType[] = [
+export const categories : CategoryObjType[] = [
     {
         icon: Plus,
         name:'PHARMACY'},

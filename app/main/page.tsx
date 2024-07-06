@@ -8,6 +8,7 @@ import RightBarBigCard from '@/components/web/rightbar/right_bar_big_card'
 import RightBar from '@/components/web/rightbar/rightbar'
 import TopBar from '@/components/web/topbar/topbar'
 import { categories } from '@/constants'
+import { useAuthContext } from '@/context/AuthContext'
 import { LLM } from '@/types'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
@@ -15,18 +16,23 @@ import React, { useEffect, useRef, useState } from 'react'
 
 
 export default function HomePage() {
-
+  const {user, fetchUser} = useAuthContext()
   const [llmList, setllmList] = useState<LLM[]>([])
   const [showCategories, setShowCategories] = useState<boolean>(false)
 
   useEffect(() => {
     fetchLLMs()
-  }, [])
+  }, [user])
   const fetchLLMs = async () => {
+    if(!user){
+      await fetchUser()
+    }
+    if(user){
 
-    const data = await getModelsPaginated(1)
-    if (data)
-    setllmList([...llmList, ...data])
+      const data = await getModelsPaginated(1)
+      if (data)
+        setllmList([...llmList, ...data])
+    }
   }
 
   return (

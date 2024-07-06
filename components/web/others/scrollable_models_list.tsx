@@ -25,11 +25,12 @@ const ScrollableModelsList = ({ llms}:{ llms?: LLM[]}) => {
     }
   };
   return (
-    <div className="w-[95%] mx-auto h-full relative  ">
+    <div className="w-[95%] min-h-32 mx-auto h-full relative  ">
     <div ref={scrollref} className="flex no-scrollbar snap-x overflow-x-scroll lg:space-x-10 space-x-4 bg-gradient-to-b from-white to-gray-100   py-4 ">
       {(llms && llms.length>0)&& llms.map((llm, index) => {
         return <HomeCard key={index} llm={llm} />
       })}
+       
 
 
       {/* Add more HomeCard components as needed */}

@@ -7,15 +7,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 const MainLayout = ({children}:{children:React.ReactNode}) => {
-  const {user} = useAuthContext()
-  const router= useRouter()
-  const pathname= usePathname()
-  useEffect(()=>{
-    if(!user && !publicRoutes.includes(pathname)){
-      router.push("/auth/login")
-    }
 
-  },[user, pathname])
+
   return (
     <div className='flex h-full w-full'>
         <DesktopSidebar/>
