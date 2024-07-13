@@ -14,16 +14,19 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { deleteDeployment } from '@/actions/model'
+import toast from 'react-hot-toast'
 
-const ModelsBoughtCard = ({id, title, image , category}:{id: string, title: string, image: string, category: CategoryType}) => {
+const ModelsBoughtCard = ({id, title, image , category, setloading}:{id: string, title: string, image: string, category: CategoryType, setloading: (x: boolean)=>void}) => {
   const deleteModel  =async()=>{
+    setloading(true)
     const data= await deleteDeployment(title, id)
     if(data.success){
-      alert("Model deleted")
+      toast.success("Model deleted")
     }
     else{
-      alert(data.msg)
+      toast.error(data.msg)
     }
+    setloading(false)
   }
   return (
     <div className='rounded-xl  p-2 lg:p-4 space-y-3   shadow-md bg-white     '>

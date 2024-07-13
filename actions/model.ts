@@ -1,65 +1,66 @@
 import { getGetAuthHeaders } from "@/hooks/getAuthHeaders";
 import { LLM } from "@/types";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-export const getModelsPaginated= async (page:number):Promise<LLM[] | null>=>{
-    try{
+export const getModelsPaginated = async (page: number): Promise<LLM[] | null> => {
+    try {
         const res = await fetch(`${BASE_URL}/model/getModels?page=${page}`);
-        const data = await res.json();   
+        const data = await res.json();
         return data;
     }
-    catch(err){
+    catch (err) {
         console.log(err)
         return null;
     }
 }
-export const getTrendingModels= async ():Promise<LLM[] | null>=>{
-    try{
+export const getTrendingModels = async (): Promise<LLM[] | null> => {
+    try {
         const res = await fetch(`${BASE_URL}/model/getTrendingModels`);
         const data = await res.json();
-        console.log(data)   
-        if(data.success && res.status===200){
+        console.log(data)
+        if (data.success && res.status === 200) {
             return data.models;
         }
         return null;
     }
-    catch(err){
+    catch (err) {
         console.log(err)
         return null;
     }
 }
-export const getLLMById= async (id:string):Promise<LLM | null>=>{
-    try{
+export const getLLMById = async (id: string): Promise<LLM | null> => {
+    try {
         const res = await fetch(`${BASE_URL}/model/getModelById?modelId=${id}`);
-        const data = await res.json();   
-        if(res.status===200){
+        const data = await res.json();
+        if (res.status === 200) {
+            console.log(data)
             return data;
         }
         return null;
     }
-    catch(err){
+    catch (err) {
         console.log(err)
         return null;
     }
 }
 
-export const BuyLLM = async (modelId:string):Promise<{success: boolean, msg: string}>=>{
-    try{
+export const BuyLLM = async (modelId: string): Promise<{ success: boolean, msg: string }> => {
+    try {
         const res = await fetch(`${BASE_URL}/model/auth/buyModel`, {
             method: "POST",
             headers: getGetAuthHeaders(),
-            body: JSON.stringify({modelId})
+            body: JSON.stringify({ modelId })
         });
-        const data = await res.json();   
-        if(res.status===200){
-            return {success: true, msg:data.msg}
+        const data = await res.json();
+        if (res.status === 200) {
+            return { success: true, msg: data.msg }
         }
-        return {success: false, msg:data.msg}
-        
+        return { success: false, msg: data.msg }
+
     }
-    catch(err){
+    catch (err) {
         console.log(err)
-        return {success: false, msg:"Internal Server Error"}
-        
+        return { success: false, msg: "Internal Server Error" }
+
     }
 }
 export const fetchSignedLink = async (title: string) => {
@@ -77,60 +78,78 @@ export const fetchSignedLink = async (title: string) => {
 }
 
 
-export const CreateModel = async(data : Pick<LLM, "title" | "category" | "costPerMonth" | "content">)=>{
-    try{
+export const CreateModel = async (data: Pick<LLM, "title" | "category" | "costPerMonth" | "content">) => {
+    try {
         const res = await fetch(`${BASE_URL}/model/auth/CreateModel`, {
             method: "POST",
             headers: getGetAuthHeaders(),
             body: JSON.stringify(data)
         });
         const response = await res.json();
-        if(res.status===200){
-            return {success: true, msg: response.msg}
+        if (res.status === 200) {
+            return { success: true, msg: response.msg }
         }
-        return {success: false, msg: response.msg}
+        return { success: false, msg: response.msg }
     }
-    catch(err){
+    catch (err) {
         console.log(err)
-        return {success: false, msg: "Internal Server Error"}
+        return { success: false, msg: "Internal Server Error" }
     }
 }
 
 export const getIpFromService = async (modelName: string, modelId: string) => {
-    try{
+    try {
         const response = await fetch(`${BASE_URL}/model/auth/getIpFromService`, {
             method: "POST",
             headers: getGetAuthHeaders(),
-            body: JSON.stringify({modelName: modelName, modelId: modelId})
+            body: JSON.stringify({ modelName: modelName, modelId: modelId })
         })
         const data = await response.json()
-        if(response.status===200){
-            return {success: true, ip: data.ip}
+        if (response.status === 200) {
+            return { success: true, ip: data.ip }
         }
-        return {success: false, msg: data.msg}
+        return { success: false, msg: data.msg }
     }
-    catch(err){
+    catch (err) {
         console.log(err)
-        return {success: false, msg:"Internal Server Error"}
+        return { success: false, msg: "Internal Server Error" }
     }
 }
 
 
 export const deleteDeployment = async (filename: string, modelId: string) => {
-    try{
+    try {
         const response = await fetch(`${BASE_URL}/model/auth/deleteDeployment`, {
             method: "POST",
             headers: getGetAuthHeaders(),
-            body: JSON.stringify({filename: filename, modelId: modelId})
+            body: JSON.stringify({ filename: filename, modelId: modelId })
         })
         const data = await response.json()
-        if(response.status===200){
-            return {success: true, msg: data.msg}
+        if (response.status === 200) {
+            return { success: true, msg: data.msg }
         }
-        return {success: false, msg: data.msg}
+        return { success: false, msg: data.msg }
     }
-    catch(err){
+    catch (err) {
         console.log(err)
-        return {success: false, msg:"Internal Server Error"}
+        return { success: false, msg: "Internal Server Error" }
     }
+}
+export const getMyLLMs = async () => {
+    try {
+
+
+        const res = await fetch(`${BASE_URL}/model/auth/getMyLLMs`, {
+            headers: getGetAuthHeaders()
+        });
+        const data = await res.json();
+        if (res.status === 200) {
+            return { success: true, data: data.data };
+        }
+        return { success: false, msg: data.msg };
+    }
+    catch (err) {
+        return { success: false, msg: "Internal Server Error" }
+    }
+
 }

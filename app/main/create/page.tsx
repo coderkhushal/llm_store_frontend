@@ -10,10 +10,11 @@ import { categories } from '@/constants'
 import { useAuthContext } from '@/context/AuthContext'
 import { CategoryType, LLM } from '@/types'
 import React, { useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const CreationPage = () => {
     const { user, fetchUser } = useAuthContext()
-
+    const [loading, setloading] = useState(false)
     const inputref = useRef<HTMLInputElement>(null)
     const [details, setdetails] = useState<Pick<LLM, "title" | "category" | "costPerMonth" | "content">>({
         title: "",
@@ -24,16 +25,16 @@ const CreationPage = () => {
 
     const UploadFile = async () => {
         if (details.title == "") {
-            alert("title is required")
+            toast.error("title is required")
             return false;
         }
         const link = await fetchSignedLink(details.title)
         if (!link) {
-            alert("url not found")
+            toast.error("url not found")
             return false;
         }
         if (!inputref.current?.files || !inputref.current?.files[0]) {
-            alert("no file selected")
+            toast.error("no file selected")
             return false;
         }
         // save file 
@@ -59,23 +60,25 @@ const CreationPage = () => {
 
 
     const handleSubmit = async () => {
+        setloading(true)
         if (inputref.current?.files) {
 
             let isUploaded = await UploadFile()
             if (isUploaded) {
                 let res = await CreateModel(details)
                 if (res.success) {
-                    alert("Model Created Successfully")
+                    toast.success("Model Created Successfully")
                 }
                 else {
-                    alert("Model Creation Failed")
+                    toast.error("Model Creation Failed")
                 }
             }
 
         }
         else {
-            alert("Please upload a file")
+            toast.error("Please upload a file")
         }
+        setloading(false)
     }
     return (
         <div className='flex flex-col w-full h-full pt-14 bg-white'>
@@ -91,12 +94,12 @@ const CreationPage = () => {
                                 <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">.py file</p>
                             </div>
                             <input id="dropzone-file" type="file" className="hidden" ref={inputref} accept='.py' />
                         </label>
-                        <h1 className='font-semibold text-2xl text-gray-400 my-4'>Upload Your Langchain Flask / Fastapi app accepting Open AI key as HTTP request headers  </h1>
+                        <h1 className='font-semibold text-2xl text-gray-400 my-4'>Upload Your Langchain Flask  app accepting Open AI key as HTTP request headers  </h1>
                     </div>
 
                     <div className="flex flex-col space-y-8  w-1/3 mx-auto ">
@@ -133,10 +136,10 @@ const CreationPage = () => {
                         </div>
                         <div className="flex flex-col space-y-2">
 
-                            <Label className='text-xl font-semibold  '>Description</Label>
-                            <Textarea className=' w-full mx-auto border-black h-32 resize-none' value={details.content} onChange={(e) => { console.log(details); setdetails({ ...details, content: e.target.value }) }}></Textarea>
+                            <Label className='text-xl font-semibold  '>Description.md</Label>
+                            <Textarea className=' w-full mx-auto border-black h-96 resize-none' value={details.content} onChange={(e) => { console.log(details); setdetails({ ...details, content: e.target.value }) }}></Textarea>
                         </div>
-                        <Button onClick={handleSubmit} className=' bg-tertiary hover:bg-sky-600'>Create</Button>
+                        <Button onClick={handleSubmit} disabled={loading} className=' bg-tertiary hover:bg-sky-600'>Create</Button>
                     </div>
                 </div>
 

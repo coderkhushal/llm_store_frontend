@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthState from "@/context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,11 @@ export default function RootLayout({
     <AuthState>
 
     <html lang="en">
-      <body className={`${inter.className} overflow-x-hidden w-full`}>{children}</body>
+
+      <body className={`${inter.className} overflow-x-hidden w-full`}>
+        <Toaster/>
+        {children}
+        </body>
     </html>
     </AuthState>
   );

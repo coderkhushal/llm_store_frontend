@@ -152,7 +152,7 @@ const Home = () => {
 					<div className="grid grid-cols-12 gap-6 items-center">
 						<div className="col-span-12 lg:col-span-7 xl:col-span-6 text-center lg:text-start mb-12 lg:mb-0">
 							<h2 className="text-3xl font-bold leading-tight tracking-wide lg:text-7xl mb-6">
-								Let's Launch Your AI Rocket!
+								Let&apos;s Launch Your AI Rocket!
 							</h2>
 							<div className="max-w-xl">
 								<p className="text-[17px] leading-relaxed opacity-80 my-12">

@@ -4,8 +4,9 @@ import React, { useRef } from 'react'
 import HomeCard from '../home/home_card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
-const ScrollableModelsList = ({ llms}:{ llms?: LLM[]}) => {
+const ScrollableModelsList = ({ llms , loading    }:{ llms?: LLM[], loading: boolean}) => {
   const scrollref = useRef<HTMLDivElement>(null);
   const scrollRight = () => {
     if (scrollref.current) {
@@ -27,10 +28,11 @@ const ScrollableModelsList = ({ llms}:{ llms?: LLM[]}) => {
   return (
     <div className="w-[95%] min-h-32 mx-auto h-full relative  ">
     <div ref={scrollref} className="flex no-scrollbar snap-x overflow-x-scroll lg:space-x-10 space-x-4 bg-gradient-to-b from-white to-gray-100   py-4 ">
-      {(llms && llms.length>0)&& llms.map((llm, index) => {
+      {(llms && llms.length>0 && !loading)&& llms.map((llm, index) => {
         return <HomeCard key={index} llm={llm} />
       })}
        
+      
 
 
       {/* Add more HomeCard components as needed */}
